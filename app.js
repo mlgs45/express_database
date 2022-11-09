@@ -3,6 +3,8 @@ require("dotenv").config();
 
 const app = express();
 
+app.use(express.json());
+
 const port = process.env.APP_PORT ?? 5500;
 
 const welcome = (req, res) => {
@@ -20,6 +22,9 @@ const userHandlers = require("./userHandlers");
 
 app.get("/api/users", userHandlers.getUsers);
 app.get("/api/users/:id", userHandlers.getUserById);
+
+app.post("/api/movies", movieHandlers.postMovie);
+app.post("/api/users", userHandlers.postUser);
 
 app.listen(port, (err) => {
   if (err) {
